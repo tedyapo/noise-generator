@@ -1,0 +1,17 @@
+set terminal pdf color enhanced
+set output 'noisegen_performance.pdf'
+set logscale x 2
+set format x '2^{%L}'
+set key bottom right Left
+set title 'Performance vs Threads and Buffer Size' font ',20'
+set xlabel 'Buffer Size (bytes)' font ',15'
+set ylabel 'Output Rate (MS/s)' font ',15'
+plot 'perf.dat' u (2**$2):($1 == 1 ? $3 : 1/0) with lines title '1 Thread',\
+     'perf.dat' u (2**$2):($1 == 2 ? $3 : 1/0) with lines title '2 Threads',\
+     'perf.dat' u (2**$2):($1 == 3 ? $3 : 1/0) with lines title '3 Threads',\
+     'perf.dat' u (2**$2):($1 == 4 ? $3 : 1/0) with lines title '4 Threads'
+
+     
+     
+
+     
